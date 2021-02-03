@@ -100,8 +100,11 @@ class board:                                                                    
 
 
 
+rows = int(input('Enter number of rows: '))                                     #user defined settings
+columns = int(input('Ener number of columns: '))
+bombs = int(input('Enter number of bombs: '))
 
-myboard = board(8,8,10)                                                         #makes x by y board with z bombs
+myboard = board(rows,columns,bombs)                                                          #makes x by y board with z bombs
 myboard.makeboard()
 print(myboard.viewboard)                                                        #prints the full board
 myboard.gameplay()                                                              #starts the game
