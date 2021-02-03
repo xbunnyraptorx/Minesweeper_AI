@@ -1,0 +1,14 @@
+Notes for user:
+The core files are:
+  gameforai.py
+  ai.py
+  nn.py
+  ga.py
+  matrix2d.py
+
+You can run the evolution by going to ai.py and running it. Read comments.
+gameforai.pi is the minesweeper game class only for the AI
+nn.py, ga.py, matrix2d.py are neural network subsidiaries created by ssocolow
+
+You can play a user friendly version of the game in game.py
+Rows and columns start at (1,1) for the user version of the game, but (0,0) when read by the AI
