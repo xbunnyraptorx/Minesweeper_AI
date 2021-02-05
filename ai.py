@@ -18,6 +18,8 @@ gen_inputs = []     #matrix of total boards
 new_board = []      #empty vector for new boards
 
 __sum = 0           #sets intial sum value to 0
+gen_sum = 0
+gen_score = []
 
 
 
@@ -43,9 +45,12 @@ def evolve():
     global nets
     global POPSIZE
     global gen_inputs
+    global gen_score
+    global gen_sum
     global __sum
 
     __sum = 0
+    gen_sum = 0
 
     print(num_of_gens)
 
@@ -53,12 +58,17 @@ def evolve():
     gen_inputs = []
     new_board = []
 
+    # new_board = gameforai.board(4,4,2)
+    # new_board.makeboard()
+    # for i in range(POPSIZE):
+    #     gen_inputs.append(new_board)
+
     #creates a gameboard for each number of the population
     for i in range(POPSIZE):
         #new board is emptied
         new_board = []
         #newboard is the gameboard and it places the bombs
-        new_board = gameforai.board(8,8,10)
+        new_board = gameforai.board(4,4,2)
         new_board.makeboard()
         #adds the new board to the vector of all boards
         gen_inputs.append(new_board)
@@ -67,12 +77,14 @@ def evolve():
     if num_of_gens == 0:
         nets.append([])
         for i in range(POPSIZE):
-            nets[0].append(nn.NeuralNetwork([[64],[10],[10],[2]]))
+            nets[0].append(nn.NeuralNetwork([[16],[10],[10],[2]]))
 
     #loop through all of the nets of the current generation
 
+
     for net in nets[num_of_gens]:
         net.score = evaluateNetwork(net)
+        gen_sum += net.score
         #print(str(nets[num_of_gens].index(net)) + ' / ' + str(POPSIZE))
     #get ready to spawn the next generation
     nets.append([])
@@ -80,6 +92,10 @@ def evolve():
     #make the probabilities for the networks to be picked
     nets[num_of_gens + 1].extend(ga.nextGeneration(nets[num_of_gens]))
 
+    for net in nets[num_of_gens]:
+        net.mutate()
+
+    gen_score.append(gen_sum)
 
     #increment the number of generations
     num_of_gens += 1
@@ -100,3 +116,5 @@ while gen_inputs[0].boardstate == 0:
     [x,y] = nets[num_of_gens][0].feedforward(gen_inputs[i].viewboard.flatten())
     gen_inputs[0].gameplay(x,y)
 print(gen_inputs[0].viewboard)
+
+print('Scores: ', gen_score)
