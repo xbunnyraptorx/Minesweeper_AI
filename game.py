@@ -91,6 +91,16 @@ class board:                                                                    
                 break
             x = int(input('Enter row: ')) - 1                                   #input row and column (using 1,1 as the upper left instead of 0,0)
             y = int(input('Enter column: ')) - 1
+
+            if x > self.rows:                                                   #if the value is over, sets to the maximum value possible
+                x = self.rows - 1
+            if y > self.columns:
+                y = self.columns - 1
+            if x < 1:                                                           #if the value is under, sets to minimum possible value
+                x = 0
+            if y < 1:
+                y = 0
+
             self.clearneighbors(x,y)
             print(self.viewboard)
             if self.board[x,y] == -1:                                           #if that spot is a bomb, you blow up
