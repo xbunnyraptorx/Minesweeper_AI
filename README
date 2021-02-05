@@ -14,7 +14,7 @@ good job however with bigger boards.
 ai.py is trained using a genetic algorithm and neural network. It is dependant on:
 
 gameforai.py
-nn.py
+nn.py           #neural network libraries created by ssocolow
 ga.py
 matrix2d.py
 
