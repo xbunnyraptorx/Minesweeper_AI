@@ -1,14 +1,25 @@
 Notes for user:
-The core files are:
-  gameforai.py
-  ai.py
-  nn.py
-  ga.py
-  matrix2d.py
+NEED NUMPY TO RUN
+This repository consists of 3 different actions:
 
-You can run the evolution by going to ai.py and running it. Read comments.
-gameforai.pi is the minesweeper game class only for the AI
-nn.py, ga.py, matrix2d.py are neural network subsidiaries created by ssocolow
+game.py is a standalone minesweeper game. When run, you may select the number of rows, columns, and bombs 
+for your game, and play it accordingly. I do not recommend more ~10x10 board, or it will go off screen
 
-You can play a user friendly version of the game in game.py
-Rows and columns start at (1,1) for the user version of the game, but (0,0) when read by the AI
+hardcoded_ai.py runs an AI that solves a 4x4 board with 2 bombs by default. It uses a simple
+probability matrix to determine which square to select. The game is dependant on gameforai_2.py
+There are a couple bugs, it can only solve the board about ~50% of the time. Cannot solve larger
+boards. Although you can edit the size of the board at the bottom of the file, it doesn't do a very
+good job however with bigger boards.
+
+ai.py is trained using a genetic algorithm and neural network. It is dependant on:
+
+gameforai.py
+nn.py
+ga.py
+matrix2d.py
+
+By default, it runs 25 epochs on 100 random 4x4 boards with 2 bombs in each, and outputs the final solution 
+from the network to the console and the total scores from each generation. I have yet to see it sucessfully
+solve the board. 
+
+
