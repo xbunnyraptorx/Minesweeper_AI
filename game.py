@@ -104,7 +104,7 @@ rows = int(input('Enter number of rows: '))                                     
 columns = int(input('Ener number of columns: '))
 bombs = int(input('Enter number of bombs: '))
 
-myboard = board(rows,columns,bombs)                                                          #makes x by y board with z bombs
+myboard = board(rows,columns,bombs)                                             #makes x by y board with z bombs
 myboard.makeboard()
 print(myboard.viewboard)                                                        #prints the full board
 myboard.gameplay()                                                              #starts the game
