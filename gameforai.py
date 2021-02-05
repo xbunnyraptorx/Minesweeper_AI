@@ -83,16 +83,21 @@ class board:                                                                    
             self.viewboard[x,y] = self.board[x,y]                               #in any other case, the board is set to that value
 
     def gameplay(self,x,y):
-            x = int(round(self.rows*x/20000))                                   #sets x and y as the output from the NN, scaled by an arbitrary number
-            y = int(round(self.columns*y/20000))
+            x = int(round(self.rows*x/1000))                                    #sets x and y as the output from the NN, scaled by an arbitrary number
+            y = int(round(self.columns*y/1000))
+
+            if x > self.rows - 1:                                               #if the value is over, sets to the maximum value possible
+                x = self.rows - 1
+            if y > self.columns - 1:
+                y = self.columns - 1
 
             if self.visited[x,y] == 1 or self.board[x,y] == -1:                 #if the spot it choses has already been seen or is a bomb, genocide
-                self.score = 1/(self.rows*self.columns)
+                self.score += 0
                 self.boardstate = 1
 
             blankcount = np.count_nonzero(self.viewboard == 101)                #counts number of spots uncleared
             if blankcount <= self.bombs:                                        #if the number of blanks is the number of bombs, the game is won, score increases by 100
-                self.score == 100
+                self.score += 100
                 self.boardstate = 1
 
             if self.visited[x][y] == 0 and self.board[x,y] != -1:               #otherwise, if the spot is not visited and the spot it chose is not a bomb, the score increases
